@@ -47,6 +47,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
 }
 
+export const dynamicParams = true; // Allow new blog post slugs not present at build time
 export const revalidate = 600; // 10 minutes
 
 async function getData(slug: string) {
