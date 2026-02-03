@@ -67,6 +67,7 @@ export interface BlogPost {
     slug: string;
     content: string;
     excerpt: string;
+    meta_description?: string;
     author: string;
     featured_image_url: string;
     category: string;
