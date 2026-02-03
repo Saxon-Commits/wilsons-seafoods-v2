@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useRef, useMemo } from 'react';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import { FishProduct, HomepageContent, OpeningHour, Review } from '@/types';
 import ProductList from '@/components/ProductList';
 import CategoryFilter from '@/components/CategoryFilter';
@@ -14,12 +14,12 @@ import ReviewsSection from '@/components/home/ReviewsSection';
 import { SearchIcon } from '@/components/icons/SearchIcon';
 import { HomeIcon } from '@/components/icons/HomeIcon';
 
-const fadeInUp = {
+const fadeInUp: Variants = {
     hidden: { opacity: 0, y: 60 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
 };
 
-const staggerContainer = {
+const staggerContainer: Variants = {
     hidden: { opacity: 0 },
     visible: {
         opacity: 1,
