@@ -128,23 +128,87 @@ const Header: React.FC<HeaderProps> = ({ logo }) => {
             </div>
 
             {/* Mobile Menu Overlay */}
-            <div className={`fixed inset-0 bg-gradient-to-br from-blue-700 to-blue-900 z-40 transition-opacity duration-300 md:hidden ${isMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+            <div className={`fixed inset-0 bg-gradient-to-br from-blue-900 via-slate-900 to-blue-900 z-40 transition-opacity duration-300 md:hidden ${isMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
                 }`}>
                 <div className="flex justify-end p-6">
-                    <button onClick={closeMenu} aria-label="Close menu" className="text-slate-300 hover:text-brand-gold">
-                        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <button onClick={closeMenu} aria-label="Close menu" className="text-white hover:text-brand-gold transition-colors">
+                        <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                         </svg>
                     </button>
                 </div>
-                <nav className="flex flex-col items-center justify-center h-full -mt-16">
-                    <ul className="flex flex-col items-center space-y-8 font-serif text-2xl">
-                        <NavLink href="/" isActive={pathname === '/'}>Home</NavLink>
-                        <NavLink href="/products" isActive={pathname === '/products'}>Products</NavLink>
-                        <NavLink href="/about" isActive={pathname === '/about'}>About</NavLink>
-                        <NavLink href="/blog" isActive={pathname?.startsWith('/blog')}>Blog</NavLink>
-                        <NavLink href="/contact" isActive={pathname === '/contact'}>Contact</NavLink>
-                        <NavLink href="https://app.fresho.com/wilsons-seafoods">Wholesale</NavLink>
+                <nav className="flex flex-col items-center justify-center h-full -mt-24">
+                    <ul className="flex flex-col items-center space-y-6 w-full px-8">
+                        <li className="w-full">
+                            <Link
+                                href="/"
+                                onClick={closeMenu}
+                                className={`block text-center py-4 px-6 rounded-lg text-2xl font-semibold transition-all duration-300 ${pathname === '/'
+                                        ? 'bg-brand-gold text-slate-900'
+                                        : 'bg-white/10 text-white hover:bg-brand-gold hover:text-slate-900'
+                                    }`}
+                            >
+                                Home
+                            </Link>
+                        </li>
+                        <li className="w-full">
+                            <Link
+                                href="/products"
+                                onClick={closeMenu}
+                                className={`block text-center py-4 px-6 rounded-lg text-2xl font-semibold transition-all duration-300 ${pathname === '/products'
+                                        ? 'bg-brand-gold text-slate-900'
+                                        : 'bg-white/10 text-white hover:bg-brand-gold hover:text-slate-900'
+                                    }`}
+                            >
+                                Products
+                            </Link>
+                        </li>
+                        <li className="w-full">
+                            <Link
+                                href="/about"
+                                onClick={closeMenu}
+                                className={`block text-center py-4 px-6 rounded-lg text-2xl font-semibold transition-all duration-300 ${pathname === '/about'
+                                        ? 'bg-brand-gold text-slate-900'
+                                        : 'bg-white/10 text-white hover:bg-brand-gold hover:text-slate-900'
+                                    }`}
+                            >
+                                About
+                            </Link>
+                        </li>
+                        <li className="w-full">
+                            <Link
+                                href="/blog"
+                                onClick={closeMenu}
+                                className={`block text-center py-4 px-6 rounded-lg text-2xl font-semibold transition-all duration-300 ${pathname?.startsWith('/blog')
+                                        ? 'bg-brand-gold text-slate-900'
+                                        : 'bg-white/10 text-white hover:bg-brand-gold hover:text-slate-900'
+                                    }`}
+                            >
+                                Blog
+                            </Link>
+                        </li>
+                        <li className="w-full">
+                            <Link
+                                href="/contact"
+                                onClick={closeMenu}
+                                className={`block text-center py-4 px-6 rounded-lg text-2xl font-semibold transition-all duration-300 ${pathname === '/contact'
+                                        ? 'bg-brand-gold text-slate-900'
+                                        : 'bg-white/10 text-white hover:bg-brand-gold hover:text-slate-900'
+                                    }`}
+                            >
+                                Contact
+                            </Link>
+                        </li>
+                        <li className="w-full">
+                            <a
+                                href="https://app.fresho.com/wilsons-seafoods"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="block text-center py-4 px-6 rounded-lg text-2xl font-semibold bg-white/10 text-white hover:bg-brand-gold hover:text-slate-900 transition-all duration-300"
+                            >
+                                Wholesale
+                            </a>
+                        </li>
                     </ul>
                 </nav>
             </div>
