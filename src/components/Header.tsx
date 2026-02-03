@@ -123,5 +123,96 @@ const Header: React.FC<HeaderProps> = ({ logo }) => {
                                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                                 </svg>
+                            ) : (
+                                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
+                                </svg>
+                            )}
+                        </button>
+                    </div>
+                </div>
+
+                {/* Mobile Dropdown Menu */}
+                <div className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+                    }`}>
+                    <nav className="px-4 py-4 bg-slate-900/95 backdrop-blur-sm border-t border-white/10">
+                        <ul className="flex flex-col space-y-2">
+                            <li>
+                                <Link
+                                    href="/"
+                                    onClick={closeMenu}
+                                    className={`block py-3 px-4 rounded-md text-base font-medium transition-colors ${pathname === '/'
+                                            ? 'bg-brand-gold text-slate-900'
+                                            : 'text-slate-200 hover:bg-white/10 hover:text-brand-gold'
+                                        }`}
+                                >
+                                    Home
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    href="/products"
+                                    onClick={closeMenu}
+                                    className={`block py-3 px-4 rounded-md text-base font-medium transition-colors ${pathname === '/products'
+                                            ? 'bg-brand-gold text-slate-900'
+                                            : 'text-slate-200 hover:bg-white/10 hover:text-brand-gold'
+                                        }`}
+                                >
+                                    Products
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    href="/about"
+                                    onClick={closeMenu}
+                                    className={`block py-3 px-4 rounded-md text-base font-medium transition-colors ${pathname === '/about'
+                                            ? 'bg-brand-gold text-slate-900'
+                                            : 'text-slate-200 hover:bg-white/10 hover:text-brand-gold'
+                                        }`}
+                                >
+                                    About
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    href="/blog"
+                                    onClick={closeMenu}
+                                    className={`block py-3 px-4 rounded-md text-base font-medium transition-colors ${pathname?.startsWith('/blog')
+                                            ? 'bg-brand-gold text-slate-900'
+                                            : 'text-slate-200 hover:bg-white/10 hover:text-brand-gold'
+                                        }`}
+                                >
+                                    Blog
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    href="/contact"
+                                    onClick={closeMenu}
+                                    className={`block py-3 px-4 rounded-md text-base font-medium transition-colors ${pathname === '/contact'
+                                            ? 'bg-brand-gold text-slate-900'
+                                            : 'text-slate-200 hover:bg-white/10 hover:text-brand-gold'
+                                        }`}
+                                >
+                                    Contact
+                                </Link>
+                            </li>
+                            <li>
+                                <a
+                                    href="https://app.fresho.com/wilsons-seafoods"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="block py-3 px-4 rounded-md text-base font-medium text-slate-200 hover:bg-white/10 hover:text-brand-gold transition-colors"
+                                >
+                                    Wholesale
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+    );
+};
 
 export default Header;
