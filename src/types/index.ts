@@ -30,6 +30,17 @@ export interface HomepageContent {
     announcement_text: string;
     about_text: string;
     about_image_url: string;
+    gateway_card_1_image_url?: string;
+    gateway_card_1_title?: string;
+    gateway_card_1_description?: string;
+    gateway_card_1_button_text?: string;
+    gateway_card_1_button_url?: string;
+    gateway_card_2_image_url?: string;
+    gateway_card_2_title?: string;
+    gateway_card_2_description?: string;
+    gateway_card_2_button_text?: string;
+    gateway_card_2_button_url?: string;
+    // Legacy names for backwards compatibility
     gateway1_image_url?: string;
     gateway1_title?: string;
     gateway1_description?: string;
