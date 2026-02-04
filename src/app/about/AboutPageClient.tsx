@@ -32,7 +32,7 @@ const AboutPageClient: React.FC<AboutPageClientProps> = ({
                             About Wilson's Seafoods
                         </h1>
                         <p className="text-xl text-slate-300 max-w-2xl">
-                            Your trusted source for premium fresh Tasmanian seafood since 1974
+                            Your trusted source for premium fresh Tasmanian seafood since 1995
                         </p>
                     </motion.div>
                 </div>

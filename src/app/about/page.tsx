@@ -6,7 +6,7 @@ import AboutPageClient from './AboutPageClient';
 
 export const metadata: Metadata = {
     title: "About Us",
-    description: "Learn about Wilson's Seafoods - your trusted source for premium fresh Tasmanian seafood since 1974. Locally sourced, sustainably caught, family-owned business in Glenorchy.",
+    description: "Learn about Wilson's Seafoods - your trusted source for premium fresh Tasmanian seafood since 1995. Locally sourced, sustainably caught, family-owned business in Glenorchy.",
     keywords: ["about Wilson's Seafoods", "Tasmanian seafood supplier", "sustainable fishing Tasmania", "family seafood business", "Glenorchy fish market"],
 };
 
