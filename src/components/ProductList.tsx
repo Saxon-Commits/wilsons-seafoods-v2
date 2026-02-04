@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FishProduct } from '@/types';
 import { PencilIcon } from '@/components/icons/PencilIcon';
@@ -109,11 +110,12 @@ const ProductCard: React.FC<{
             </div>
         )}
         <div className="overflow-hidden relative h-48 md:h-64">
-            <img
+            <Image
                 src={product.image_url}
                 alt={product.name}
-                loading="lazy"
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out"
+                fill
+                sizes="(max-width: 768px) 50vw, 33vw"
+                className="object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out"
             />
             {/* Quick View Overlay */}
             {!isAdmin && (

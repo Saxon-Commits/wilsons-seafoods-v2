@@ -159,7 +159,7 @@ export default function HomePageClient({ products, settings, content, hours, cat
                         {/* View All Products Button */}
                         <a
                             href="/products"
-                            className="inline-flex items-center gap-2 px-8 py-4 bg-brand-blue hover:bg-brand-blue/90 text-white font-semibold rounded-full transition-all duration-300 shadow-lg hover:shadow-brand-blue/50 transform hover:scale-105"
+                            className="inline-flex items-center gap-2 px-8 py-4 bg-sky-500 hover:bg-sky-400 text-white font-bold rounded-full transition-all duration-300 shadow-lg shadow-sky-500/40 hover:shadow-sky-400/60 transform hover:scale-105"
                         >
                             View All Products
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
@@ -63,12 +64,14 @@ const AboutPageClient: React.FC<AboutPageClientProps> = ({
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6 }}
-                        className="order-1 md:order-2"
+                        className="order-1 md:order-2 relative w-full aspect-[4/3]"
                     >
-                        <img
+                        <Image
                             src={aboutImageUrl}
                             alt="Wilson's Seafoods"
-                            className="rounded-xl shadow-2xl w-full h-auto object-cover aspect-[4/3] border border-white/10"
+                            fill
+                            sizes="(max-width: 768px) 100vw, 50vw"
+                            className="rounded-xl shadow-2xl object-cover border border-white/10"
                         />
                     </motion.div>
                 </div>

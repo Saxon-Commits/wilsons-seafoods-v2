@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { motion, Variants } from 'framer-motion';
 import { HomepageContent } from '@/types';
 
@@ -34,7 +35,7 @@ const GatewayCard: React.FC<{
             className="glass-panel rounded-xl overflow-hidden group transform transition-all duration-300 hover:shadow-2xl hover:shadow-brand-blue/20 hover:-translate-y-2 flex flex-col h-full border border-white/10 bg-gradient-to-br from-cyan-900/40 to-blue-900/40 backdrop-blur-sm"
         >
             <div className="relative overflow-hidden h-64 flex-shrink-0">
-                <img src={imageUrl} alt={headline} loading="lazy" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out" />
+                <Image src={imageUrl} alt={headline} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent"></div>
             </div>
 

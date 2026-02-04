@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FishProduct } from '@/types';
 
@@ -42,10 +43,12 @@ const QuickViewModal: React.FC<QuickViewModalProps> = ({ product, isOpen, onClos
                             className="bg-slate-900 w-full max-w-4xl rounded-2xl overflow-hidden shadow-2xl border border-slate-700 pointer-events-auto flex flex-col md:flex-row"
                         >
                             <div className="w-full md:w-1/2 h-64 md:h-auto relative">
-                                <img
+                                <Image
                                     src={product.image_url}
                                     alt={product.name}
-                                    className="w-full h-full object-cover"
+                                    fill
+                                    sizes="(max-width: 768px) 100vw, 50vw"
+                                    className="object-cover"
                                 />
                                 <div className="absolute top-4 left-4 flex flex-col items-start gap-2">
                                     {product.is_fresh && (

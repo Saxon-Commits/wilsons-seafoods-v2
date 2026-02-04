@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 
 interface HeaderProps {
@@ -81,11 +82,13 @@ const Header: React.FC<HeaderProps> = ({ logo }) => {
             <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between py-4">
                     <Link href="/" className="flex items-center space-x-4 md:space-x-6 group">
-                        <div className="flex-shrink-0 transform transition-transform group-hover:scale-105 duration-300">
-                            <img
+                        <div className="flex-shrink-0 transform transition-transform group-hover:scale-105 duration-300 relative w-20 h-20 md:w-24 md:h-24">
+                            <Image
                                 src={logo}
                                 alt="Wilsons Seafoods Logo"
-                                className="h-20 w-20 md:h-24 md:w-24 rounded-full shadow-lg object-contain bg-white/5 border border-white/10 p-1.5 backdrop-blur-sm"
+                                fill
+                                priority
+                                className="rounded-full shadow-lg object-contain bg-white/5 border border-white/10 p-1.5 backdrop-blur-sm"
                             />
                         </div>
                         <div>
@@ -113,102 +116,89 @@ const Header: React.FC<HeaderProps> = ({ logo }) => {
                     </nav>
 
                     {/* Mobile Menu Button */}
-                    <div className="md:hidden">
+                    <div className="md:hidden relative">
                         <button
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
                             aria-label="Toggle menu"
                             className="text-slate-200 hover:text-brand-gold transition-colors"
                         >
                             {isMenuOpen ? (
-                                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                                 </svg>
                             ) : (
-                                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
                                 </svg>
                             )}
                         </button>
-                    </div>
-                </div>
 
-                {/* Mobile Dropdown Menu */}
-                <div className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-                    }`}>
-                    <nav className="px-4 py-4 bg-slate-900/95 backdrop-blur-sm border-t border-white/10">
-                        <ul className="flex flex-col space-y-2">
-                            <li>
-                                <Link
-                                    href="/"
-                                    onClick={closeMenu}
-                                    className={`block py-3 px-4 rounded-md text-base font-medium transition-colors ${pathname === '/'
-                                            ? 'bg-brand-gold text-slate-900'
-                                            : 'text-slate-200 hover:bg-white/10 hover:text-brand-gold'
-                                        }`}
-                                >
-                                    Home
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    href="/products"
-                                    onClick={closeMenu}
-                                    className={`block py-3 px-4 rounded-md text-base font-medium transition-colors ${pathname === '/products'
-                                            ? 'bg-brand-gold text-slate-900'
-                                            : 'text-slate-200 hover:bg-white/10 hover:text-brand-gold'
-                                        }`}
-                                >
-                                    Products
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    href="/about"
-                                    onClick={closeMenu}
-                                    className={`block py-3 px-4 rounded-md text-base font-medium transition-colors ${pathname === '/about'
-                                            ? 'bg-brand-gold text-slate-900'
-                                            : 'text-slate-200 hover:bg-white/10 hover:text-brand-gold'
-                                        }`}
-                                >
-                                    About
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    href="/blog"
-                                    onClick={closeMenu}
-                                    className={`block py-3 px-4 rounded-md text-base font-medium transition-colors ${pathname?.startsWith('/blog')
-                                            ? 'bg-brand-gold text-slate-900'
-                                            : 'text-slate-200 hover:bg-white/10 hover:text-brand-gold'
-                                        }`}
-                                >
-                                    Blog
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    href="/contact"
-                                    onClick={closeMenu}
-                                    className={`block py-3 px-4 rounded-md text-base font-medium transition-colors ${pathname === '/contact'
-                                            ? 'bg-brand-gold text-slate-900'
-                                            : 'text-slate-200 hover:bg-white/10 hover:text-brand-gold'
-                                        }`}
-                                >
-                                    Contact
-                                </Link>
-                            </li>
-                            <li>
-                                <a
-                                    href="https://app.fresho.com/wilsons-seafoods"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="block py-3 px-4 rounded-md text-base font-medium text-slate-200 hover:bg-white/10 hover:text-brand-gold transition-colors"
-                                >
-                                    Wholesale
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
+                        {/* Compact Dropdown Menu */}
+                        {isMenuOpen && (
+                            <div className="absolute right-0 top-full mt-2 w-44 bg-slate-900/98 backdrop-blur-md rounded-lg shadow-2xl border border-white/20 overflow-hidden z-50">
+                                <nav className="py-1">
+                                    <Link
+                                        href="/"
+                                        onClick={closeMenu}
+                                        className={`block px-4 py-2 text-sm font-medium transition-colors ${pathname === '/'
+                                            ? 'bg-brand-gold/20 text-brand-gold'
+                                            : 'text-slate-200 hover:bg-white/5 hover:text-brand-gold'
+                                            }`}
+                                    >
+                                        Home
+                                    </Link>
+                                    <Link
+                                        href="/products"
+                                        onClick={closeMenu}
+                                        className={`block px-4 py-2 text-sm font-medium transition-colors ${pathname === '/products'
+                                            ? 'bg-brand-gold/20 text-brand-gold'
+                                            : 'text-slate-200 hover:bg-white/5 hover:text-brand-gold'
+                                            }`}
+                                    >
+                                        Products
+                                    </Link>
+                                    <Link
+                                        href="/about"
+                                        onClick={closeMenu}
+                                        className={`block px-4 py-2 text-sm font-medium transition-colors ${pathname === '/about'
+                                            ? 'bg-brand-gold/20 text-brand-gold'
+                                            : 'text-slate-200 hover:bg-white/5 hover:text-brand-gold'
+                                            }`}
+                                    >
+                                        About
+                                    </Link>
+                                    <Link
+                                        href="/blog"
+                                        onClick={closeMenu}
+                                        className={`block px-4 py-2 text-sm font-medium transition-colors ${pathname?.startsWith('/blog')
+                                            ? 'bg-brand-gold/20 text-brand-gold'
+                                            : 'text-slate-200 hover:bg-white/5 hover:text-brand-gold'
+                                            }`}
+                                    >
+                                        Blog
+                                    </Link>
+                                    <Link
+                                        href="/contact"
+                                        onClick={closeMenu}
+                                        className={`block px-4 py-2 text-sm font-medium transition-colors ${pathname === '/contact'
+                                            ? 'bg-brand-gold/20 text-brand-gold'
+                                            : 'text-slate-200 hover:bg-white/5 hover:text-brand-gold'
+                                            }`}
+                                    >
+                                        Contact
+                                    </Link>
+                                    <a
+                                        href="https://app.fresho.com/wilsons-seafoods"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="block px-4 py-2 text-sm font-medium text-slate-200 hover:bg-white/5 hover:text-brand-gold transition-colors"
+                                    >
+                                        Wholesale
+                                    </a>
+                                </nav>
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
         </header>

@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 
 interface AboutUsProps {
   text: string;
@@ -14,12 +15,13 @@ const AboutUs: React.FC<AboutUsProps> = ({ text, image_url }) => {
           {text}
         </p>
       </div>
-      <div className="order-1 md:order-2">
-        <img
+      <div className="order-1 md:order-2 relative w-full aspect-[4/3]">
+        <Image
           src={image_url}
           alt="About Wilsons Seafoods"
-          loading="lazy"
-          className="rounded-xl shadow-lg w-full h-auto object-cover aspect-[4/3]"
+          fill
+          sizes="(max-width: 768px) 100vw, 50vw"
+          className="rounded-xl shadow-lg object-cover"
         />
       </div>
     </section>

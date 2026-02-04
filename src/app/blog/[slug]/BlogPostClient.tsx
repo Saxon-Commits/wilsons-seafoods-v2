@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { BlogPost } from '@/types';
@@ -23,10 +24,13 @@ const BlogPostClient: React.FC<BlogPostClientProps> = ({ post }) => {
                     {/* Featured Image */}
                     {post.featured_image_url && (
                         <div className="relative h-64 md:h-96 overflow-hidden">
-                            <img
+                            <Image
                                 src={post.featured_image_url}
                                 alt={post.title}
-                                className="w-full h-full object-cover"
+                                fill
+                                priority
+                                sizes="(max-width: 768px) 100vw, 896px"
+                                className="object-cover"
                             />
                         </div>
                     )}

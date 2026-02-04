@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { BlogPost } from '@/types';
@@ -51,10 +52,12 @@ const BlogListClient: React.FC<BlogListClientProps> = ({ posts }) => {
                             >
                                 {post.featured_image_url && (
                                     <div className="relative h-48 overflow-hidden">
-                                        <img
+                                        <Image
                                             src={post.featured_image_url}
                                             alt={post.title}
-                                            className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                                            fill
+                                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                                            className="object-cover hover:scale-105 transition-transform duration-300"
                                         />
                                     </div>
                                 )}
