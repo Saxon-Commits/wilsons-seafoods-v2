@@ -36,18 +36,26 @@ const SettingsAdminClient: React.FC<SettingsAdminClientProps> = ({
     const bgInputRef = useRef<HTMLInputElement>(null);
 
     const handleImageUpload = async (field: 'logo_url' | 'background_url', file: File | null) => {
-        if (!file) return;
+        if (!file) {
+            console.log('[Settings] No file selected');
+            return;
+        }
 
+        alert(`Selected file: ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB) for field: ${field}`);
+        console.log(`[Settings] Starting upload for ${field}`, file);
         setUploading(true);
         const formData = new FormData();
         formData.append('image', file);
 
         const result = await uploadImage(formData, field);
+        console.log('[Settings] Upload result:', result);
 
         if (result.success) {
+            alert(`✓ ${field} uploaded successfully!`);
             router.refresh();
         } else {
-            alert(result.error || 'Failed to upload image');
+            console.error('[Settings] Upload failed:', result.error);
+            alert(`Upload failed: ${result.error}`);
         }
 
         setUploading(false);
