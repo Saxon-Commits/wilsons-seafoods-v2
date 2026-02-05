@@ -22,18 +22,26 @@ const HomepageAdminClient: React.FC<HomepageAdminClientProps> = ({ content }) =>
     };
 
     const handleImageUpload = async (field: string, file: File | null) => {
-        if (!file) return;
+        if (!file) {
+            console.log('No file selected');
+            return;
+        }
 
+        alert(`Selected file: ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB) for field: ${field}`);
+        console.log(`Starting image upload for field: ${field}`, file);
         setUploading(true);
         const formData = new FormData();
         formData.append('image', file);
 
         const result = await uploadHomepageImage(formData, field);
+        console.log('Upload result:', result);
 
         if (result.success) {
+            alert('Image uploaded successfully!');
             router.refresh();
         } else {
-            alert(result.error || 'Failed to upload image');
+            console.error('Upload failed:', result.error);
+            alert(`Upload failed: ${result.error}`);
         }
 
         setUploading(false);
