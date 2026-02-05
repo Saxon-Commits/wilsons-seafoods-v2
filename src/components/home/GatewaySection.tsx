@@ -73,9 +73,9 @@ const GatewaySection: React.FC<{
             <div className="grid md:grid-cols-2 gap-8 md:gap-12">
                 <GatewayCard
                     imageUrl={content.gateway1_image_url || "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?q=80&w=1200&auto=format&fit=crop"}
-                    headline={content.gateway1_title || "Public Fish Market"}
-                    description={content.gateway1_description || "Visit our store to see the freshest Tasmanian seafood. We are open to the public."}
-                    buttonText={content.gateway1_button_text || "View Products"}
+                    headline={content.gateway1_title || "Shop Our Public Store"}
+                    description={content.gateway1_description || "Get the freshest Tasmanian seafood and pickup in store today. Browse our public store."}
+                    buttonText={content.gateway1_button_text || "Available in Store"}
                     buttonHref={content.gateway1_button_url || "/products"}
                 />
                 <GatewayCard

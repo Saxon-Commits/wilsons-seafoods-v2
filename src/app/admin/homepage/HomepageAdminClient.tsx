@@ -115,19 +115,41 @@ const HomepageAdminClient: React.FC<HomepageAdminClientProps> = ({ content }) =>
                 <h2 className="text-2xl font-semibold mb-4 font-serif">Gateway Card 1</h2>
                 <div className="space-y-4">
                     <div>
+                        <label className="block text-base font-medium text-slate-300 mb-2">Image</label>
+                        <div className="flex items-start gap-4">
+                            {content.gateway1_image_url && (
+                                <img
+                                    src={content.gateway1_image_url}
+                                    alt="Gateway Card 1"
+                                    className="w-32 h-24 object-cover rounded-md border border-slate-600"
+                                />
+                            )}
+                            <div className="flex-1">
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={(e) => handleImageUpload('gateway1_image_url', e.target.files?.[0] || null)}
+                                    disabled={uploading}
+                                    className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-blue-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 disabled:opacity-50"
+                                />
+                                <p className="text-xs text-slate-400 mt-1">Upload a new image to replace the current one</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
                         <label className="block text-base font-medium text-slate-300 mb-2">Title</label>
                         <input
                             type="text"
-                            value={content.gateway_card_1_title || ''}
-                            onChange={(e) => handleContentChange('gateway_card_1_title', e.target.value)}
+                            value={content.gateway1_title || ''}
+                            onChange={(e) => handleContentChange('gateway1_title', e.target.value)}
                             className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-blue text-white text-lg"
                         />
                     </div>
                     <div>
                         <label className="block text-base font-medium text-slate-300 mb-2">Description</label>
                         <textarea
-                            value={content.gateway_card_1_description || ''}
-                            onChange={(e) => handleContentChange('gateway_card_1_description', e.target.value)}
+                            value={content.gateway1_description || ''}
+                            onChange={(e) => handleContentChange('gateway1_description', e.target.value)}
                             className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-blue text-white text-lg"
                             rows={3}
                         />
@@ -137,8 +159,8 @@ const HomepageAdminClient: React.FC<HomepageAdminClientProps> = ({ content }) =>
                             <label className="block text-base font-medium text-slate-300 mb-2">Button Text</label>
                             <input
                                 type="text"
-                                value={content.gateway_card_1_button_text || ''}
-                                onChange={(e) => handleContentChange('gateway_card_1_button_text', e.target.value)}
+                                value={content.gateway1_button_text || ''}
+                                onChange={(e) => handleContentChange('gateway1_button_text', e.target.value)}
                                 className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-blue text-white text-lg"
                             />
                         </div>
@@ -146,8 +168,8 @@ const HomepageAdminClient: React.FC<HomepageAdminClientProps> = ({ content }) =>
                             <label className="block text-base font-medium text-slate-300 mb-2">Button URL</label>
                             <input
                                 type="text"
-                                value={content.gateway_card_1_button_url || ''}
-                                onChange={(e) => handleContentChange('gateway_card_1_button_url', e.target.value)}
+                                value={content.gateway1_button_url || ''}
+                                onChange={(e) => handleContentChange('gateway1_button_url', e.target.value)}
                                 className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-blue text-white text-lg"
                             />
                         </div>
@@ -159,19 +181,41 @@ const HomepageAdminClient: React.FC<HomepageAdminClientProps> = ({ content }) =>
                 <h2 className="text-2xl font-semibold mb-4 font-serif">Gateway Card 2</h2>
                 <div className="space-y-4">
                     <div>
+                        <label className="block text-base font-medium text-slate-300 mb-2">Image</label>
+                        <div className="flex items-start gap-4">
+                            {content.gateway2_image_url && (
+                                <img
+                                    src={content.gateway2_image_url}
+                                    alt="Gateway Card 2"
+                                    className="w-32 h-24 object-cover rounded-md border border-slate-600"
+                                />
+                            )}
+                            <div className="flex-1">
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={(e) => handleImageUpload('gateway2_image_url', e.target.files?.[0] || null)}
+                                    disabled={uploading}
+                                    className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-blue-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 disabled:opacity-50"
+                                />
+                                <p className="text-xs text-slate-400 mt-1">Upload a new image to replace the current one</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
                         <label className="block text-base font-medium text-slate-300 mb-2">Title</label>
                         <input
                             type="text"
-                            value={content.gateway_card_2_title || ''}
-                            onChange={(e) => handleContentChange('gateway_card_2_title', e.target.value)}
+                            value={content.gateway2_title || ''}
+                            onChange={(e) => handleContentChange('gateway2_title', e.target.value)}
                             className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-blue text-white text-lg"
                         />
                     </div>
                     <div>
                         <label className="block text-base font-medium text-slate-300 mb-2">Description</label>
                         <textarea
-                            value={content.gateway_card_2_description || ''}
-                            onChange={(e) => handleContentChange('gateway_card_2_description', e.target.value)}
+                            value={content.gateway2_description || ''}
+                            onChange={(e) => handleContentChange('gateway2_description', e.target.value)}
                             className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-blue text-white text-lg"
                             rows={3}
                         />
@@ -181,8 +225,8 @@ const HomepageAdminClient: React.FC<HomepageAdminClientProps> = ({ content }) =>
                             <label className="block text-base font-medium text-slate-300 mb-2">Button Text</label>
                             <input
                                 type="text"
-                                value={content.gateway_card_2_button_text || ''}
-                                onChange={(e) => handleContentChange('gateway_card_2_button_text', e.target.value)}
+                                value={content.gateway2_button_text || ''}
+                                onChange={(e) => handleContentChange('gateway2_button_text', e.target.value)}
                                 className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-blue text-white text-lg"
                             />
                         </div>
@@ -190,8 +234,8 @@ const HomepageAdminClient: React.FC<HomepageAdminClientProps> = ({ content }) =>
                             <label className="block text-base font-medium text-slate-300 mb-2">Button URL</label>
                             <input
                                 type="text"
-                                value={content.gateway_card_2_button_url || ''}
-                                onChange={(e) => handleContentChange('gateway_card_2_button_url', e.target.value)}
+                                value={content.gateway2_button_url || ''}
+                                onChange={(e) => handleContentChange('gateway2_button_url', e.target.value)}
                                 className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-blue text-white text-lg"
                             />
                         </div>

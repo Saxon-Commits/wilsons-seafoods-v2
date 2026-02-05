@@ -19,6 +19,7 @@ const EditBlogPostClient: React.FC<EditBlogPostClientProps> = ({ post }) => {
     const [author, setAuthor] = useState(post.author || "Wilson's Seafoods Team");
     const [category, setCategory] = useState(post.category || '');
     const [featuredImageUrl, setFeaturedImageUrl] = useState(post.featured_image_url || '');
+    const [featuredImageFile, setFeaturedImageFile] = useState<File | null>(null);
     const [metaDescription, setMetaDescription] = useState(post.meta_description || '');
     const [published, setPublished] = useState(post.published);
     const [saving, setSaving] = useState(false);
@@ -34,9 +35,15 @@ const EditBlogPostClient: React.FC<EditBlogPostClientProps> = ({ post }) => {
         formData.append('content', content);
         formData.append('author', author);
         formData.append('category', category);
-        formData.append('featured_image_url', featuredImageUrl);
         formData.append('meta_description', metaDescription);
         formData.append('published', published.toString());
+
+        // Add image file or URL
+        if (featuredImageFile) {
+            formData.append('featured_image', featuredImageFile);
+        } else if (featuredImageUrl && !featuredImageUrl.startsWith('data:')) {
+            formData.append('featured_image_url', featuredImageUrl);
+        }
 
         const result = await updateBlogPost(post.id!, formData);
 
@@ -128,32 +135,76 @@ const EditBlogPostClient: React.FC<EditBlogPostClientProps> = ({ post }) => {
                 </div>
             </div>
 
-            {/* Featured Image & Meta Description */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                    <label className="block text-sm font-medium text-slate-300 mb-2">
-                        Featured Image URL
-                    </label>
+            {/* Featured Image */}
+            <div>
+                <label className="block text-sm font-medium text-slate-300 mb-2">
+                    Featured Image
+                </label>
+                <div className="space-y-3">
+                    <input
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            if (file) {
+                                setFeaturedImageFile(file);
+                                // Create preview
+                                const reader = new FileReader();
+                                reader.onloadend = () => {
+                                    setFeaturedImageUrl(reader.result as string);
+                                };
+                                reader.readAsDataURL(file);
+                            }
+                        }}
+                        className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-blue-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700"
+                    />
+                    <p className="text-xs text-slate-400">Or enter an image URL:</p>
                     <input
                         type="url"
-                        value={featuredImageUrl}
-                        onChange={(e) => setFeaturedImageUrl(e.target.value)}
+                        value={featuredImageUrl.startsWith('data:') ? '' : featuredImageUrl}
+                        onChange={(e) => {
+                            setFeaturedImageUrl(e.target.value);
+                            setFeaturedImageFile(null);
+                        }}
                         placeholder="https://..."
                         className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
+                    {featuredImageUrl && (
+                        <div className="relative">
+                            <img
+                                src={featuredImageUrl}
+                                alt="Preview"
+                                className="w-full max-h-48 object-cover rounded-md border border-slate-600"
+                            />
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    setFeaturedImageUrl('');
+                                    setFeaturedImageFile(null);
+                                }}
+                                className="absolute top-2 right-2 bg-red-600 text-white p-1 rounded-full hover:bg-red-700"
+                            >
+                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                        </div>
+                    )}
                 </div>
-                <div>
-                    <label className="block text-sm font-medium text-slate-300 mb-2">
-                        Meta Description (SEO)
-                    </label>
-                    <input
-                        type="text"
-                        value={metaDescription}
-                        onChange={(e) => setMetaDescription(e.target.value)}
-                        placeholder="Brief description for search engines"
-                        className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                </div>
+            </div>
+
+            {/* Meta Description */}
+            <div>
+                <label className="block text-sm font-medium text-slate-300 mb-2">
+                    Meta Description (SEO)
+                </label>
+                <input
+                    type="text"
+                    value={metaDescription}
+                    onChange={(e) => setMetaDescription(e.target.value)}
+                    placeholder="Brief description for search engines"
+                    className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
             </div>
 
             {/* Published Toggle */}

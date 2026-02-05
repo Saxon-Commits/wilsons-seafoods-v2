@@ -2,12 +2,65 @@
 
 import { revalidatePath } from 'next/cache';
 import { createClient } from '@/lib/supabase-server';
-import { redirect } from 'next/navigation';
+
+export async function uploadBlogImage(formData: FormData) {
+    const supabase = await createClient();
+
+    try {
+        const imageFile = formData.get('image') as File;
+
+        if (!imageFile || imageFile.size === 0) {
+            return { success: false, error: 'No image provided' };
+        }
+
+        const fileExt = imageFile.name.split('.').pop();
+        const fileName = `blog-${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
+        const filePath = `public/${fileName}`;
+
+        const { error: uploadError } = await supabase.storage
+            .from('images')
+            .upload(filePath, imageFile);
+
+        if (uploadError) {
+            console.error('Upload error:', uploadError);
+            return { success: false, error: 'Failed to upload image' };
+        }
+
+        const { data: urlData } = supabase.storage.from('images').getPublicUrl(filePath);
+
+        return { success: true, url: urlData.publicUrl };
+    } catch (error) {
+        console.error('Error uploading image:', error);
+        return { success: false, error: 'An unexpected error occurred' };
+    }
+}
 
 export async function createBlogPost(formData: FormData) {
     const supabase = await createClient();
 
     try {
+        let featuredImageUrl = formData.get('featured_image_url') as string;
+
+        // Handle image file upload if provided
+        const imageFile = formData.get('featured_image') as File;
+        if (imageFile && imageFile.size > 0) {
+            const fileExt = imageFile.name.split('.').pop();
+            const fileName = `blog-${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
+            const filePath = `public/${fileName}`;
+
+            const { error: uploadError } = await supabase.storage
+                .from('images')
+                .upload(filePath, imageFile);
+
+            if (uploadError) {
+                console.error('Upload error:', uploadError);
+                return { success: false, error: 'Failed to upload image' };
+            }
+
+            const { data: urlData } = supabase.storage.from('images').getPublicUrl(filePath);
+            featuredImageUrl = urlData.publicUrl;
+        }
+
         const { error } = await supabase.from('blog_posts').insert({
             title: formData.get('title'),
             slug: formData.get('slug'),
@@ -15,7 +68,7 @@ export async function createBlogPost(formData: FormData) {
             content: formData.get('content'),
             author: formData.get('author') || "Wilson's Seafoods Team",
             category: formData.get('category'),
-            featured_image_url: formData.get('featured_image_url'),
+            featured_image_url: featuredImageUrl,
             meta_description: formData.get('meta_description'),
             published: formData.get('published') === 'true',
             published_at: formData.get('published') === 'true' ? new Date().toISOString() : null,
@@ -37,6 +90,28 @@ export async function updateBlogPost(id: number, formData: FormData) {
     const supabase = await createClient();
 
     try {
+        let featuredImageUrl = formData.get('featured_image_url') as string;
+
+        // Handle image file upload if provided
+        const imageFile = formData.get('featured_image') as File;
+        if (imageFile && imageFile.size > 0) {
+            const fileExt = imageFile.name.split('.').pop();
+            const fileName = `blog-${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
+            const filePath = `public/${fileName}`;
+
+            const { error: uploadError } = await supabase.storage
+                .from('images')
+                .upload(filePath, imageFile);
+
+            if (uploadError) {
+                console.error('Upload error:', uploadError);
+                return { success: false, error: 'Failed to upload image' };
+            }
+
+            const { data: urlData } = supabase.storage.from('images').getPublicUrl(filePath);
+            featuredImageUrl = urlData.publicUrl;
+        }
+
         const updateData: any = {
             title: formData.get('title'),
             slug: formData.get('slug'),
@@ -44,7 +119,7 @@ export async function updateBlogPost(id: number, formData: FormData) {
             content: formData.get('content'),
             author: formData.get('author') || "Wilson's Seafoods Team",
             category: formData.get('category'),
-            featured_image_url: formData.get('featured_image_url'),
+            featured_image_url: featuredImageUrl,
             meta_description: formData.get('meta_description'),
             published: formData.get('published') === 'true',
             updated_at: new Date().toISOString(),

@@ -54,7 +54,7 @@ const AboutPageClient: React.FC<AboutPageClientProps> = ({
                         <div className="text-slate-300 text-lg leading-relaxed space-y-4">
                             <p>{aboutText}</p>
                             <p>
-                                We pride ourselves on offering only the freshest catch, sourced daily from local Tasmanian waters and trusted suppliers. Our commitment to quality and sustainability has made us a favorite among both households and restaurants across Tasmania.
+                                We pride ourselves on offering only the freshest catch, sourced from local Tasmanian waters and trusted suppliers. Our commitment to quality and sustainability has made us a favorite among both households and restaurants across Tasmania.
                             </p>
                         </div>
                     </motion.div>
@@ -137,7 +137,7 @@ const AboutPageClient: React.FC<AboutPageClientProps> = ({
                             Local Community
                         </h3>
                         <p className="text-slate-300 leading-relaxed">
-                            As a family-owned business, we're proud to support local fishermen and serve the Glenorchy community.
+                            As a family-owned business, we're proud to support local fishermen and serve the Tasmanian community.
                         </p>
                     </motion.div>
                 </div>
@@ -158,9 +158,9 @@ const AboutPageClient: React.FC<AboutPageClientProps> = ({
 
                     <div className="space-y-6">
                         <div className="glass-panel rounded-lg p-6 bg-slate-800/50 backdrop-blur-sm border border-white/10">
-                            <h3 className="text-2xl font-bold text-white mb-3">Daily Fresh Deliveries</h3>
+                            <h3 className="text-2xl font-bold text-white mb-3">Fresh Fish</h3>
                             <p className="text-slate-300 text-lg">
-                                Our seafood arrives fresh daily, straight from the boats and trusted suppliers. When you shop at Wilson's, you're getting today's catch, not yesterday's.
+                                We select only the freshest seafood available to provide to the Tasmanian community. From classic favorites to seasonal specialties, we've got something for every taste.
                             </p>
                         </div>
 

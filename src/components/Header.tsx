@@ -95,7 +95,7 @@ const Header: React.FC<HeaderProps> = ({ logo }) => {
                             <h1 className="text-2xl sm:text-3xl font-serif font-extrabold tracking-tight text-white group-hover:text-brand-blue transition-colors">
                                 Wilsons Seafoods
                             </h1>
-                            <div className="mt-1 text-sm text-slate-300 hidden sm:block flex flex-col">
+                            <div className="mt-1 text-xs sm:text-sm text-slate-300 flex flex-col">
                                 <span className="flex items-center gap-1">
                                     5 Sussex St, Glenorchy
                                 </span>
