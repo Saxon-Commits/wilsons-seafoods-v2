@@ -95,12 +95,10 @@ export default function HomePageClient({ products, settings, content, hours, cat
                 <div className="absolute inset-0 z-0">
                     <div className="absolute inset-0 bg-black/40 z-10"></div>
                     <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/10 to-blue-900/60 z-10"></div>
-                    {backgroundUrl && (
-                        <div
-                            className="w-full h-full bg-cover bg-center transform scale-105 animate-slow-zoom"
-                            style={{ backgroundImage: `url(${backgroundUrl})` }}
-                        ></div>
-                    )}
+                    <div
+                        className="w-full h-full bg-cover bg-center transform scale-105 animate-slow-zoom"
+                        style={{ backgroundImage: `url(/hero%20image.jpg)` }}
+                    ></div>
                 </div>
 
                 <motion.div
@@ -181,7 +179,7 @@ export default function HomePageClient({ products, settings, content, hours, cat
                     viewport={{ once: true }}
                     variants={fadeInUp}
                 >
-                    <AboutUs text={content.about_text} image_url={content.about_image_url} />
+                    <AboutUs text={content.about_text} />
                 </motion.section>
 
                 {/* Hours & Location */}

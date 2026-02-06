@@ -101,19 +101,10 @@ const HomepageAdminClient: React.FC<HomepageAdminClientProps> = ({ content }) =>
                             rows={5}
                         />
                     </div>
-                    <div>
-                        <label className="block text-base font-medium text-slate-300 mb-2">About Image</label>
-                        <input
-                            ref={aboutImageRef}
-                            type="file"
-                            accept="image/*"
-                            onChange={(e) => handleImageUpload('about_image_url', e.target.files?.[0] || null)}
-                            className="w-full text-base text-slate-400 file:mr-4 file:py-3 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-slate-700 file:text-slate-300 hover:file:bg-slate-600 transition-colors"
-                            disabled={uploading}
-                        />
-                        {content.about_image_url && (
-                            <img src={content.about_image_url} alt="About" className="mt-2 rounded-md max-h-48 object-cover" />
-                        )}
+                    <div className="p-4 bg-slate-700 rounded-md border border-slate-600">
+                        <p className="text-sm text-slate-400 mb-2">About Image:</p>
+                        <p className="text-white font-mono text-sm">/about us image.jpg</p>
+                        <p className="text-xs text-slate-500 mt-1">Image is managed in the /public folder</p>
                     </div>
                 </div>
             </div>

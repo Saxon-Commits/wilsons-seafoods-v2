@@ -136,18 +136,12 @@ const SettingsAdminClient: React.FC<SettingsAdminClientProps> = ({
                         )}
                     </div>
                     <div>
-                        <label className="block text-base font-medium text-slate-300 mb-2">Background Image</label>
-                        <input
-                            ref={bgInputRef}
-                            type="file"
-                            accept="image/*"
-                            onChange={(e) => handleImageUpload('background_url', e.target.files?.[0] || null)}
-                            className="w-full text-base text-slate-400 file:mr-4 file:py-3 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-slate-700 file:text-slate-300 hover:file:bg-slate-600 transition-colors"
-                            disabled={uploading}
-                        />
-                        {initialBackgroundUrl && (
-                            <img src={initialBackgroundUrl} alt="Background" className="mt-2 rounded-md max-h-32 object-cover w-full" />
-                        )}
+                        <label className="block text-base font-medium text-slate-300 mb-2">Background Image (Hero)</label>
+                        <div className="p-4 bg-slate-700 rounded-md border border-slate-600">
+                            <p className="text-sm text-slate-400 mb-2">Hero Background Image:</p>
+                            <p className="text-white font-mono text-sm">/hero image.jpg</p>
+                            <p className="text-xs text-slate-500 mt-1">Image is managed in the /public folder</p>
+                        </div>
                     </div>
                 </div>
             </div>
