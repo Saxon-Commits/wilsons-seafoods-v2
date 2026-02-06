@@ -69,6 +69,7 @@ const GatewaySection: React.FC<{
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={staggerContainer}
+            className="max-w-6xl mx-auto px-4"
         >
             <div className="grid md:grid-cols-2 gap-8 md:gap-12">
                 <GatewayCard

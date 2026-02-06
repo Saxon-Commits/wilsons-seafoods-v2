@@ -54,7 +54,12 @@ const Header: React.FC<HeaderProps> = ({ logo }) => {
     useEffect(() => {
         const handleScroll = () => {
             const currentScrollY = window.scrollY;
-            if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
+            const heroThreshold = window.innerHeight * 1.5; // 150vh - past gateway cards
+
+            // On homepage, keep header visible until past hero section
+            if (pathname === '/' && currentScrollY < heroThreshold) {
+                setIsVisible(true);
+            } else if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
                 setIsVisible(false);
             } else {
                 setIsVisible(true);
@@ -64,7 +69,7 @@ const Header: React.FC<HeaderProps> = ({ logo }) => {
 
         window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+    }, [pathname]);
 
     // Close mobile menu when route changes
     useEffect(() => {

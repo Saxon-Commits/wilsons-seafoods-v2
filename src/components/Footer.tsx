@@ -13,7 +13,7 @@ const Footer: React.FC<{
     phoneNumber?: string;
 }> = ({ socialLinks, abn, phoneNumber }) => {
     return (
-        <footer className="bg-[#0f172a] text-slate-300 border-t border-slate-700/50">
+        <footer className="relative z-20 bg-[#0f172a] text-slate-300 border-t border-slate-700/50">
             <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
                     <div>
