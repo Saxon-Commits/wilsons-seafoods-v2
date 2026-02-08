@@ -46,6 +46,7 @@ const NavLink: React.FC<{
 const Header: React.FC<HeaderProps> = ({ logo }) => {
     const [isVisible, setIsVisible] = useState(true);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [scrollY, setScrollY] = useState(0);
     const lastScrollY = useRef(0);
     const pathname = usePathname();
 
@@ -56,13 +57,24 @@ const Header: React.FC<HeaderProps> = ({ logo }) => {
             const currentScrollY = window.scrollY;
             const heroThreshold = window.innerHeight * 1.5; // 150vh - past gateway cards
 
+            setScrollY(currentScrollY);
+
             // On homepage, keep header visible until past hero section
-            if (pathname === '/' && currentScrollY < heroThreshold) {
-                setIsVisible(true);
-            } else if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
-                setIsVisible(false);
+            if (pathname === '/') {
+                if (currentScrollY < heroThreshold) {
+                    setIsVisible(true);
+                } else if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
+                    setIsVisible(false);
+                } else {
+                    setIsVisible(true);
+                }
             } else {
-                setIsVisible(true);
+                // Other pages: normal auto-hide behavior
+                if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
+                    setIsVisible(false);
+                } else {
+                    setIsVisible(true);
+                }
             }
             lastScrollY.current = currentScrollY;
         };
@@ -81,8 +93,11 @@ const Header: React.FC<HeaderProps> = ({ logo }) => {
             className={`fixed w-full top-0 z-50 transition-transform duration-300 ease-in-out ${isVisible ? 'translate-y-0' : '-translate-y-full'
                 }`}
         >
-            {/* Glassmorphism Background Wrapper */}
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-800 via-blue-900 to-slate-900 border-b border-white/10 shadow-lg"></div>
+            {/* Background Wrapper - transparent on homepage until past hero section */}
+            <div className={`absolute inset-0 shadow-lg transition-all duration-300 ${pathname === '/' && scrollY < (typeof window !== 'undefined' ? window.innerHeight * 1.5 + 200 : 0)
+                ? 'bg-transparent shadow-none'
+                : 'bg-gradient-to-r from-blue-800 via-blue-900 to-slate-900'
+                }`}></div>
 
             <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between py-4">

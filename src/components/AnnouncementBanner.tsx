@@ -7,7 +7,7 @@ interface AnnouncementBannerProps {
 
 const AnnouncementBanner: React.FC<AnnouncementBannerProps> = ({ text, onDismiss }) => {
   return (
-    <div className="bg-brand-blue text-white font-semibold p-3 text-center text-md relative z-30">
+    <div className="bg-brand-blue text-white font-semibold p-3 text-center text-md relative z-[60]">
       <p className="pr-8">{text}</p>
       <button
         onClick={onDismiss}
