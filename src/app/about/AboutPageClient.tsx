@@ -67,7 +67,7 @@ const AboutPageClient: React.FC<AboutPageClientProps> = ({
                         className="order-1 md:order-2 relative w-full aspect-[4/3]"
                     >
                         <Image
-                            src={aboutImageUrl}
+                            src="/about us image.jpg"
                             alt="Wilson's Seafoods"
                             fill
                             sizes="(max-width: 768px) 100vw, 50vw"

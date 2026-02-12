@@ -5,7 +5,6 @@ import { motion, Variants } from 'framer-motion';
 import { FishProduct, HomepageContent, OpeningHour, Review } from '@/types';
 import ProductList from '@/components/ProductList';
 import CategoryFilter from '@/components/CategoryFilter';
-import AnnouncementBanner from '@/components/AnnouncementBanner';
 import AboutUs from '@/components/AboutUs';
 import Hours from '@/components/Hours';
 import ContactForm from '@/components/ContactForm';
@@ -39,20 +38,12 @@ interface HomePageClientProps {
 }
 
 export default function HomePageClient({ products, settings, content, hours, categories, reviews }: HomePageClientProps) {
-    const [isBannerVisible, setIsBannerVisible] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
     const [activeFilter, setActiveFilter] = useState('All');
     const [contactMessage, setContactMessage] = useState('');
     const contactFormRef = useRef<HTMLElement>(null);
 
     const backgroundUrl = settings?.background_url || null;
-
-    const handleDismissBanner = () => {
-        setIsBannerVisible(false);
-        if (typeof window !== 'undefined') {
-            sessionStorage.setItem('bannerDismissed', 'true');
-        }
-    };
 
     const handleEnquire = (product: FishProduct) => {
         setContactMessage(`I'm interested in the ${product.name}. Is it available?`);
@@ -82,13 +73,6 @@ export default function HomePageClient({ products, settings, content, hours, cat
         <div className="min-h-screen bg-[linear-gradient(135deg,_#1d4ed8_0%,_#1e3a8a_30%,_#0f172a_100%)] text-slate-100 font-sans selection:bg-sky-500/30 relative">
             <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-900/20 via-transparent to-transparent pointer-events-none z-0"></div>
             <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-blue-900/20 via-transparent to-transparent pointer-events-none z-0"></div>
-
-            {isBannerVisible && content.announcement_text && (
-                <AnnouncementBanner
-                    text={content.announcement_text}
-                    onDismiss={handleDismissBanner}
-                />
-            )}
 
             {/* Fixed Hero Background */}
             <div className="fixed top-0 left-0 w-full h-screen z-0">
