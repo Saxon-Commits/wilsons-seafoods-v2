@@ -39,26 +39,34 @@ export async function createBlogPost(formData: FormData) {
     const supabase = await createClient();
 
     try {
+        console.log('[createBlogPost] Starting new post creation');
         let featuredImageUrl = formData.get('featured_image_url') as string;
 
         // Handle image file upload if provided
         const imageFile = formData.get('featured_image') as File;
+        console.log('[createBlogPost] Image file present:', !!imageFile, 'Size:', imageFile?.size);
+
         if (imageFile && imageFile.size > 0) {
+            console.log('[createBlogPost] Starting image upload...');
             const fileExt = imageFile.name.split('.').pop();
             const fileName = `blog-${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
             const filePath = `public/${fileName}`;
 
-            const { error: uploadError } = await supabase.storage
+            console.log('[createBlogPost] Uploading to path:', filePath);
+
+            const { error: uploadError, data: uploadData } = await supabase.storage
                 .from('images')
                 .upload(filePath, imageFile);
 
             if (uploadError) {
-                console.error('Upload error:', uploadError);
-                return { success: false, error: 'Failed to upload image' };
+                console.error('[createBlogPost] Upload error:', uploadError);
+                return { success: false, error: `Failed to upload image: ${uploadError.message}` };
             }
 
+            console.log('[createBlogPost] Upload successful:', uploadData);
             const { data: urlData } = supabase.storage.from('images').getPublicUrl(filePath);
             featuredImageUrl = urlData.publicUrl;
+            console.log('[createBlogPost] Generated public URL:', featuredImageUrl);
         }
 
         const { error } = await supabase.from('blog_posts').insert({
@@ -90,26 +98,34 @@ export async function updateBlogPost(id: number, formData: FormData) {
     const supabase = await createClient();
 
     try {
+        console.log('[updateBlogPost] Starting update for post ID:', id);
         let featuredImageUrl = formData.get('featured_image_url') as string;
 
         // Handle image file upload if provided
         const imageFile = formData.get('featured_image') as File;
+        console.log('[updateBlogPost] Image file present:', !!imageFile, 'Size:', imageFile?.size);
+
         if (imageFile && imageFile.size > 0) {
+            console.log('[updateBlogPost] Starting image upload...');
             const fileExt = imageFile.name.split('.').pop();
             const fileName = `blog-${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
             const filePath = `public/${fileName}`;
 
-            const { error: uploadError } = await supabase.storage
+            console.log('[updateBlogPost] Uploading to path:', filePath);
+
+            const { error: uploadError, data: uploadData } = await supabase.storage
                 .from('images')
                 .upload(filePath, imageFile);
 
             if (uploadError) {
-                console.error('Upload error:', uploadError);
-                return { success: false, error: 'Failed to upload image' };
+                console.error('[updateBlogPost] Upload error:', uploadError);
+                return { success: false, error: `Failed to upload image: ${uploadError.message}` };
             }
 
+            console.log('[updateBlogPost] Upload successful:', uploadData);
             const { data: urlData } = supabase.storage.from('images').getPublicUrl(filePath);
             featuredImageUrl = urlData.publicUrl;
+            console.log('[updateBlogPost] Generated public URL:', featuredImageUrl);
         }
 
         const updateData: any = {
