@@ -133,9 +133,9 @@ export async function updateOpeningHours(hours: OpeningHour[]) {
 
         if (error) throw error;
 
-        revalidatePath('/admin/settings');
-        revalidatePath('/contact');
-        revalidatePath('/');
+        revalidatePath('/admin/settings', 'page');
+        revalidatePath('/contact', 'page');
+        revalidatePath('/', 'page');
 
         return { success: true };
     } catch (error) {

@@ -11,11 +11,11 @@ export const INITIAL_HOMEPAGE_CONTENT: HomepageContent = {
 };
 
 export const OPENING_HOURS: OpeningHour[] = [
-    { day: 'Monday', time: 'Closed' },
-    { day: 'Tuesday', time: 'Closed' },
-    { day: 'Wednesday', time: '7am - 1pm' },
-    { day: 'Thursday', time: '7am - 2pm' },
-    { day: 'Friday', time: '7am - 2:30pm' },
-    { day: 'Saturday', time: 'Closed' },
+    { day: 'Monday', time: '9am - 2:30pm' },
+    { day: 'Tuesday', time: '9am - 2:30pm' },
+    { day: 'Wednesday', time: '9am - 2:30pm' },
+    { day: 'Thursday', time: '9am - 2:30pm' },
+    { day: 'Friday', time: '9am - 2:30pm' },
+    { day: 'Saturday', time: '9am - 1pm' },
     { day: 'Sunday', time: 'Closed' },
 ];
